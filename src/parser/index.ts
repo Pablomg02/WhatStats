@@ -16,12 +16,22 @@ function collectRawEntries(text: string): RawEntry[] {
   const lines = text.split(/\r?\n/);
   const entries: RawEntry[] = [];
   let current: RawEntry | null = null;
+  // anchorTs is the timestamp of the last accepted real entry. Lines with a parseable
+  // prefix whose timestamp is strictly earlier are treated as pasted content (e.g. someone
+  // quoting an older chat export) and folded into the previous real message verbatim.
+  let anchorTs = -Infinity;
 
   for (const line of lines) {
     const prefix = parseLinePrefix(line);
     if (prefix) {
+      const ts = prefix.timestamp.getTime();
+      if (current && ts < anchorTs) {
+        current.lines.push(line);
+        continue;
+      }
       if (current) entries.push(current);
       current = { timestamp: prefix.timestamp, rawRest: prefix.rest, lines: [prefix.rest] };
+      anchorTs = ts;
     } else if (current) {
       current.lines.push(line);
     }

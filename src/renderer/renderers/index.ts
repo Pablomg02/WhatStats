@@ -6,6 +6,8 @@ import { TableRanking } from './TableRanking';
 import { KpiGrid } from './KpiGrid';
 import { Heatmap } from './Heatmap';
 import { TextSamples } from './TextSamples';
+import { ScatterQuadrant } from './ScatterQuadrant';
+import { WordCloud } from './WordCloud';
 
 type RendererMap = {
   [K in StatResultKind]: ComponentType<{ data: Extract<StatResult, { kind: K }>['data'] }>;
@@ -18,4 +20,6 @@ export const renderers: RendererMap = {
   'kpi-grid': KpiGrid,
   heatmap: Heatmap,
   'text-samples': TextSamples,
+  'scatter-quadrant': ScatterQuadrant,
+  'word-cloud': WordCloud,
 };

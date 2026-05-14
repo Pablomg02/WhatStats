@@ -7,7 +7,7 @@ import { Privacy } from './ui/pages/Privacy';
 
 export function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/loading" element={<Loading />} />

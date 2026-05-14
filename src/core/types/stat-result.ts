@@ -57,12 +57,53 @@ export interface TextSampleData {
   samples: { label: string; text: string }[];
 }
 
+export interface ScatterPoint {
+  label: string;
+  x: number;
+  y: number;
+  extra?: string;
+}
+
+export interface ScatterQuadrantData {
+  points: ScatterPoint[];
+  xLabel: string;
+  yLabel: string;
+  xMin?: number;
+  xMax?: number;
+  yMin?: number;
+  yMax?: number;
+  xThreshold?: number;
+  yThreshold?: number;
+  quadrantLabels?: {
+    topLeft?: string;
+    topRight?: string;
+    bottomLeft?: string;
+    bottomRight?: string;
+  };
+}
+
+export interface WordCloudWord {
+  text: string;
+  weight: number;
+}
+
+export interface WordCloudGroup {
+  label: string;
+  words: WordCloudWord[];
+}
+
+export interface WordCloudData {
+  groups: WordCloudGroup[];
+}
+
 export type StatResult =
   | { kind: 'bar-chart'; data: BarChartData }
   | { kind: 'line-chart'; data: LineChartData }
   | { kind: 'ranking'; data: RankingData }
   | { kind: 'kpi-grid'; data: KpiGridData }
   | { kind: 'heatmap'; data: HeatmapData }
-  | { kind: 'text-samples'; data: TextSampleData };
+  | { kind: 'text-samples'; data: TextSampleData }
+  | { kind: 'scatter-quadrant'; data: ScatterQuadrantData }
+  | { kind: 'word-cloud'; data: WordCloudData };
 
 export type StatResultKind = StatResult['kind'];
