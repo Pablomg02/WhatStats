@@ -6,6 +6,16 @@ import { stripInvisibleMarks, startsWithLrm, extractMentions, containsLink } fro
 import { detectSystemEvent } from './system-events';
 import { classifyContent } from './content-classifier';
 
+// Android: " <Se editó este mensaje.>"  |  iOS: " ‎<This message was edited>"
+const EDITED_RE = / ‎?<(?:Se editó este mensaje\.|This message was edited)>$/;
+
+function stripEditedSuffix(body: string): { body: string; isEdited: boolean } {
+  if (EDITED_RE.test(body)) {
+    return { body: body.replace(EDITED_RE, ''), isEdited: true };
+  }
+  return { body, isEdited: false };
+}
+
 interface RawEntry {
   timestamp: Date;
   rawRest: string;
@@ -66,8 +76,26 @@ function buildMessage(entry: RawEntry): ParsedMessage {
   const remaining = entry.lines.slice(1).join('\n');
   const body = remaining ? `${firstLineBody}\n${remaining}` : firstLineBody;
 
-  const classification = classifyContent(body);
-  const cleanedBody = stripInvisibleMarks(body);
+  // iOS quirk: system events (member-added, etc.) appear as "[DATE] Person: ‎event text"
+  // instead of the Android format "DATE - ‎event text". Detect by LRM-prefixed body.
+  if (startsWithLrm(firstLineBody)) {
+    const cleanedBody = stripInvisibleMarks(firstLineBody);
+    const detection = detectSystemEvent(cleanedBody);
+    if (detection) {
+      return {
+        timestamp: entry.timestamp,
+        autor: detection.actor,
+        mensaje: cleanedBody,
+        kind: 'text',
+        isSystem: true,
+        systemEvent: detection.event,
+      };
+    }
+  }
+
+  const { body: bodyForClassify, isEdited } = stripEditedSuffix(body);
+  const classification = classifyContent(bodyForClassify);
+  const cleanedBody = stripInvisibleMarks(bodyForClassify);
 
   return {
     timestamp: entry.timestamp,
@@ -76,8 +104,9 @@ function buildMessage(entry: RawEntry): ParsedMessage {
     kind: classification.kind,
     isSystem: false,
     poll: classification.poll,
-    mentions: extractMentions(body),
+    mentions: extractMentions(bodyForClassify),
     hasLink: containsLink(cleanedBody),
+    isEdited: isEdited || undefined,
   };
 }
 

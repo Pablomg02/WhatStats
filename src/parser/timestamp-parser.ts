@@ -1,7 +1,8 @@
-// Format A (Spanish/standard): "14/05/2026, 10:30 - "
+// Format A (Android/Spanish): "14/05/2026, 10:30 - "
 const PREFIX_DASH = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4}),\s(\d{1,2}):(\d{2})\s-\s/;
-// Format B (English): "[2/8/22, 11:02:52] "
-const PREFIX_BRACKET = /^\[(\d{1,2})\/(\d{1,2})\/(\d{2,4}),\s(\d{1,2}):(\d{2})(?::\d{2})?\]\s/;
+// Format B (iOS/English): "[2/8/22, 11:02:52] "
+// iOS media/system lines are prefixed with U+200E (LRM), so the bracket may not be at position 0.
+const PREFIX_BRACKET = /^[‎‏]?\[(\d{1,2})\/(\d{1,2})\/(\d{2,4}),\s(\d{1,2}):(\d{2})(?::\d{2})?\]\s/;
 
 export interface ParsedPrefix {
   timestamp: Date;

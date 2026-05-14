@@ -40,4 +40,5 @@ export interface ParsedMessage {
   poll?: PollContent;
   mentions?: string[];
   hasLink?: boolean;
+  isEdited?: boolean;
 }
