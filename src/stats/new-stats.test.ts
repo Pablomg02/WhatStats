@@ -1,15 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import { readFileSync } from 'node:fs';
-import { resolve } from 'node:path';
 import { parseWhatsAppTxt } from '@/parser/index';
 import { computeReachOutRatio } from './modules/reach-out-ratio/compute';
 import { computeDoubleTexting } from './modules/double-texting/compute';
 import { computeConversationStarterEnder } from './modules/conversation-starter-ender/compute';
 import { computeHourWeekdayHeatmap } from './modules/hour-weekday-heatmap/compute';
 import { computeWordCloud } from './modules/word-cloud/compute';
+import { SYNTHETIC_INDIVIDUAL_CHAT } from './test-data';
 
-const text = readFileSync(resolve(__dirname, '../../ejemplo_individual.txt'), 'utf8');
-const dataset = parseWhatsAppTxt(text);
+const dataset = parseWhatsAppTxt(SYNTHETIC_INDIVIDUAL_CHAT);
 
 describe('reach-out-ratio', () => {
   it('returns one row per participant and percentages sum to 100', () => {
