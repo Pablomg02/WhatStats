@@ -7,7 +7,7 @@ const longestSilences: StatModule<LongestSilencesParams> = {
   description: 'Periodos más largos sin mensajes en el chat.',
   needsParams: true,
   paramsSchema: {
-    fields: [{ name: 'n', type: 'number', label: '¿Cuántos?', placeholder: '10' }],
+    fields: [{ name: 'n', type: 'number', label: '¿Cuántos?', placeholder: '10', min: '1' }],
   },
   compute: (dataset, params) => ({
     kind: 'ranking',

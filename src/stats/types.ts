@@ -9,6 +9,8 @@ export interface ParamField {
   label: string;
   placeholder?: string;
   required?: boolean;
+  min?: string;
+  max?: string;
 }
 
 export interface ParamsSchema {

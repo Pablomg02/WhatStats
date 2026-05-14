@@ -32,11 +32,11 @@ export function StatPanelHost({ module }: StatPanelHostProps) {
   const isSuccess = panel?.status === 'success' && panel.outcome && panel.outcome.ok;
 
   return (
-    <section className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
+    <section className="rounded-xl border border-ws-border bg-ws-card p-6 shadow-sm">
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-slate-900">{module.label}</h3>
+        <h3 className="text-lg font-semibold text-ws-text">{module.label}</h3>
         {module.description && (
-          <p className="mt-1 text-sm text-slate-500">{module.description}</p>
+          <p className="mt-1 text-sm text-ws-muted">{module.description}</p>
         )}
       </div>
 
@@ -44,20 +44,22 @@ export function StatPanelHost({ module }: StatPanelHostProps) {
         <div className="mb-4 flex flex-wrap items-end gap-3">
           {module.paramsSchema?.fields.map((field) => (
             <div key={field.name} className="flex flex-col">
-              <label className="text-xs font-medium text-slate-600">{field.label}</label>
+              <label className="text-xs font-medium text-ws-muted">{field.label}</label>
               <input
                 type={field.type}
                 placeholder={field.placeholder}
+                min={field.min}
+                max={field.max}
                 value={params[field.name] ?? ''}
                 onChange={(e) => setParams((p) => ({ ...p, [field.name]: e.target.value }))}
-                className="mt-1 rounded-md border border-slate-300 px-3 py-1.5 text-sm focus:border-whatsapp-teal focus:outline-none"
+                className="mt-1 rounded-md border border-ws-border bg-ws-surface px-3 py-1.5 text-sm text-ws-text placeholder-ws-muted focus:border-ws-green focus:outline-none"
               />
             </div>
           ))}
           <button
             type="button"
             onClick={handleRun}
-            className="rounded-md bg-whatsapp-green px-4 py-2 text-sm font-medium text-white hover:bg-green-600"
+            className="rounded-md bg-ws-green px-4 py-2 text-sm font-medium text-white transition hover:opacity-90"
           >
             Ejecutar
           </button>

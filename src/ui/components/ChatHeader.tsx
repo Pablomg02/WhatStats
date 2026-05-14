@@ -10,18 +10,18 @@ export function ChatHeader({ metadata, onReset }: ChatHeaderProps) {
   const title = metadata.chatName ?? (isGroup ? 'Grupo sin nombre' : 'Conversación individual');
 
   return (
-    <header className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+    <header className="rounded-xl border border-ws-border bg-ws-card p-5 shadow-sm">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-xs uppercase tracking-wide text-slate-500">
+          <div className="text-xs uppercase tracking-wide text-ws-muted">
             {isGroup ? 'Grupo' : 'Conversación individual'}
           </div>
-          <h2 className="mt-0.5 text-xl font-semibold text-slate-900">{title}</h2>
+          <h2 className="mt-0.5 text-xl font-semibold text-ws-text">{title}</h2>
         </div>
         <button
           type="button"
           onClick={onReset}
-          className="rounded-md border border-slate-300 px-3 py-1.5 text-sm text-slate-600 hover:bg-slate-100"
+          className="rounded-md border border-ws-border px-3 py-1.5 text-sm text-ws-muted transition hover:border-ws-green hover:text-ws-green"
         >
           Analizar otro chat
         </button>
@@ -35,16 +35,27 @@ export function ChatHeader({ metadata, onReset }: ChatHeaderProps) {
       </div>
 
       <div className="mt-4 flex flex-wrap gap-2">
-        {Object.entries(metadata.counts.perAuthor)
-          .sort(([, a], [, b]) => b - a)
-          .map(([author, count]) => (
-            <span
-              key={author}
-              className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-700"
-            >
-              {author} · {count.toLocaleString()}
-            </span>
-          ))}
+        {(() => {
+          const sorted = Object.entries(metadata.counts.perAuthor).sort(([, a], [, b]) => b - a);
+          const max = sorted[0]?.[1] ?? 1;
+          return sorted.map(([author, count]) => {
+            const ratio = count / max;
+            const bgOpacity = 0.08 + ratio * 0.42;
+            const textColor = ratio > 0.45 ? '#E9EDEF' : '#8696A0';
+            return (
+              <span
+                key={author}
+                className="rounded-full px-3 py-1 text-xs transition"
+                style={{
+                  backgroundColor: `rgba(0, 168, 132, ${bgOpacity})`,
+                  color: textColor,
+                }}
+              >
+                {author} · {count.toLocaleString()}
+              </span>
+            );
+          });
+        })()}
       </div>
     </header>
   );
@@ -53,8 +64,8 @@ export function ChatHeader({ metadata, onReset }: ChatHeaderProps) {
 function Stat({ label, value }: { label: string; value: string | number }) {
   return (
     <div>
-      <div className="text-xs uppercase tracking-wide text-slate-500">{label}</div>
-      <div className="mt-0.5 text-sm font-medium text-slate-900">{value}</div>
+      <div className="text-xs uppercase tracking-wide text-ws-muted">{label}</div>
+      <div className="mt-0.5 text-sm font-medium text-ws-text">{value}</div>
     </div>
   );
 }

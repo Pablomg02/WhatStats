@@ -20,10 +20,10 @@ export function Landing() {
     <PageLayout>
       <div className="flex flex-col gap-10">
         <section className="text-center">
-          <h1 className="text-4xl font-bold text-slate-900">WhatStats</h1>
-          <p className="mx-auto mt-3 max-w-2xl text-slate-600">
+          <h1 className="text-4xl font-bold text-ws-text">WhatStats</h1>
+          <p className="mx-auto mt-3 max-w-2xl text-ws-muted">
             Analiza tus chats de WhatsApp y descubre patrones, rankings y estadísticas detalladas.
-            <span className="block font-semibold text-whatsapp-teal">
+            <span className="mt-1 block font-semibold text-ws-green">
               El análisis ocurre 100% en tu navegador. Ningún dato sale de tu dispositivo.
             </span>
           </p>
@@ -31,14 +31,14 @@ export function Landing() {
 
         <Dropzone onFileSelected={handleFile} />
 
-        <section id="privacidad" className="rounded-xl border border-slate-200 bg-white p-6">
-          <h2 className="text-xl font-semibold">Privacidad y seguridad</h2>
-          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-slate-600">
+        <section id="privacidad" className="rounded-xl border border-ws-border bg-ws-card p-6">
+          <h2 className="text-xl font-semibold text-ws-text">Privacidad y seguridad</h2>
+          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-ws-muted">
             <li>El archivo nunca abandona tu dispositivo.</li>
             <li>No hay servidor que reciba, almacene ni procese los mensajes.</li>
             <li>El código es auditable.</li>
           </ul>
-          <p className="mt-3 text-sm text-slate-500">
+          <p className="mt-3 text-sm text-ws-muted opacity-75">
             Recomendación: borra el archivo exportado del dispositivo cuando termines el análisis si
             no quieres dejar rastro local del chat.
           </p>

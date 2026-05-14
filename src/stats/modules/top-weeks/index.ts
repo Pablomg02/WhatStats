@@ -7,7 +7,7 @@ const topWeeks: StatModule<TopWeeksParams> = {
   description: 'Semanas con más mensajes (agrupadas por lunes).',
   needsParams: true,
   paramsSchema: {
-    fields: [{ name: 'n', type: 'number', label: '¿Cuántas?', placeholder: '10' }],
+    fields: [{ name: 'n', type: 'number', label: '¿Cuántas?', placeholder: '10', min: '1' }],
   },
   compute: (dataset, params) => ({ kind: 'bar-chart', data: computeTopWeeks(dataset, params ?? {}) }),
 };

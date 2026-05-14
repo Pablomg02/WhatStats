@@ -17,8 +17,8 @@ export function StatSelector({ activeStatId, onSelect }: StatSelectorProps) {
             onClick={() => onSelect(stat.id)}
             className={`rounded-full px-4 py-2 text-sm font-medium transition ${
               active
-                ? 'bg-whatsapp-teal text-white shadow-sm'
-                : 'bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50'
+                ? 'bg-ws-green text-white shadow-sm'
+                : 'bg-ws-surface text-ws-muted ring-1 ring-ws-border hover:bg-ws-card hover:text-ws-text'
             }`}
           >
             {stat.label}

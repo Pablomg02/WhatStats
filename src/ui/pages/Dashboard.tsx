@@ -35,7 +35,7 @@ export function Dashboard() {
         <StatSelector activeStatId={activeStatId} onSelect={setActiveStat} />
         {activeModule && <StatPanelHost module={activeModule} />}
         {!activeModule && (
-          <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
+          <div className="rounded-xl border border-dashed border-ws-border bg-ws-card p-8 text-center text-sm text-ws-muted">
             Selecciona una estadística para empezar a explorar el chat.
           </div>
         )}

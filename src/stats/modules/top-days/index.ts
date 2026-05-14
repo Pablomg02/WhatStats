@@ -7,7 +7,7 @@ const topDays: StatModule<TopDaysParams> = {
   description: 'Días del calendario con más mensajes.',
   needsParams: true,
   paramsSchema: {
-    fields: [{ name: 'n', type: 'number', label: '¿Cuántos?', placeholder: '10' }],
+    fields: [{ name: 'n', type: 'number', label: '¿Cuántos?', placeholder: '10', min: '1' }],
   },
   compute: (dataset, params) => ({ kind: 'bar-chart', data: computeTopDays(dataset, params ?? {}) }),
 };

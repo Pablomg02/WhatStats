@@ -1,4 +1,7 @@
-const LINE_PREFIX = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4}),\s(\d{1,2}):(\d{2})\s-\s/;
+// Format A (Spanish/standard): "14/05/2026, 10:30 - "
+const PREFIX_DASH = /^(\d{1,2})\/(\d{1,2})\/(\d{2,4}),\s(\d{1,2}):(\d{2})\s-\s/;
+// Format B (English): "[2/8/22, 11:02:52] "
+const PREFIX_BRACKET = /^\[(\d{1,2})\/(\d{1,2})\/(\d{2,4}),\s(\d{1,2}):(\d{2})(?::\d{2})?\]\s/;
 
 export interface ParsedPrefix {
   timestamp: Date;
@@ -6,7 +9,7 @@ export interface ParsedPrefix {
 }
 
 export function parseLinePrefix(line: string): ParsedPrefix | null {
-  const match = LINE_PREFIX.exec(line);
+  const match = PREFIX_DASH.exec(line) ?? PREFIX_BRACKET.exec(line);
   if (!match) return null;
 
   const [full, dStr, mStr, yStr, hStr, minStr] = match;
@@ -26,5 +29,5 @@ export function parseLinePrefix(line: string): ParsedPrefix | null {
 }
 
 export function hasLinePrefix(line: string): boolean {
-  return LINE_PREFIX.test(line);
+  return PREFIX_DASH.test(line) || PREFIX_BRACKET.test(line);
 }

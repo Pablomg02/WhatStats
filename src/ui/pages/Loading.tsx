@@ -9,17 +9,17 @@ export function Loading() {
       <div className="flex flex-col items-center justify-center gap-4 py-24 text-center">
         {!error ? (
           <>
-            <div className="h-12 w-12 animate-spin rounded-full border-4 border-whatsapp-teal border-t-transparent" />
-            <h2 className="text-lg font-semibold text-slate-800">Analizando tu chat…</h2>
-            <p className="text-sm text-slate-500">
+            <div className="h-12 w-12 animate-spin rounded-full border-4 border-ws-green border-t-transparent" />
+            <h2 className="text-lg font-semibold text-ws-text">Analizando tu chat…</h2>
+            <p className="text-sm text-ws-muted">
               Esto puede tardar unos segundos en chats grandes.
             </p>
           </>
         ) : (
           <>
             <div className="text-4xl">⚠️</div>
-            <h2 className="text-lg font-semibold text-red-700">No se pudo procesar el archivo</h2>
-            <p className="text-sm text-red-600">{error.message}</p>
+            <h2 className="text-lg font-semibold text-red-400">No se pudo procesar el archivo</h2>
+            <p className="text-sm text-red-500">{error.message}</p>
           </>
         )}
       </div>
