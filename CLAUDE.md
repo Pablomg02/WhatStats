@@ -6,8 +6,8 @@ Este archivo sirve como referencia rápida para entender la estructura, objetivo
 
 - **[README.md](./README.md)**: Visión general del proyecto. Aplicación web (y futura móvil) para analizar chats de WhatsApp con enfoque **Privacy First** (procesamiento 100% local).
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)**: Estructura técnica en 3 capas (Parser, Stats, Renderer). Uso de **Web Workers** para no bloquear el hilo principal y ejecución **lazy** de estadísticas con cacheo en memoria.
-- **[GOALS.md](./GOALS.md)**: Definición de métricas y KPIs a implementar, incluyendo volumen, cronología, estacionalidad y ritmos circadianos.
 - **[UI.md](./UI.md)**: Flujo de la interfaz de usuario, desde la landing page y zona de carga hasta el dashboard dinámico de estadísticas.
+- **[src/stats/modules/README.md](./src/stats/modules/README.md)**: Guía para añadir nuevas estadísticas al sistema.
 
 ## Principios de Desarrollo
 
