@@ -27,17 +27,19 @@ const api = {
     if (!dataset) {
       return { ok: false, error: { name: 'NoDataset', message: 'No hay dataset cargado', statId } };
     }
-    const key = cacheKey(statId, params);
-    const cached = cache.get(key);
-    if (cached) return cached;
-
     const mod = getStatModule(statId);
     if (!mod) {
       return { ok: false, error: { name: 'UnknownStat', message: `Stat desconocida: ${statId}`, statId } };
     }
-    const outcome = runStat(mod, dataset, params);
-    cache.set(key, outcome);
-    return outcome;
+    if (!mod.rerollable) {
+      const key = cacheKey(statId, params);
+      const cached = cache.get(key);
+      if (cached) return cached;
+      const outcome = runStat(mod, dataset, params);
+      cache.set(key, outcome);
+      return outcome;
+    }
+    return runStat(mod, dataset, params);
   },
 
   async reset(): Promise<void> {

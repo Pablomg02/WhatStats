@@ -22,6 +22,7 @@ export interface StatModule<TParams = void> {
   label: string;
   description?: string;
   needsParams: boolean;
+  rerollable?: boolean;
   paramsSchema?: ParamsSchema;
   compute(dataset: ParsedDataset, params: TParams): StatResult;
 }

@@ -96,6 +96,20 @@ export interface WordCloudData {
   groups: WordCloudGroup[];
 }
 
+export interface ChatSnippetMessage {
+  author: string;
+  time: string;
+  date?: string;
+  text: string;
+  isFirstFromAuthor: boolean;
+  isMedia: boolean;
+  isDeleted: boolean;
+}
+
+export interface ChatSnippetData {
+  messages: ChatSnippetMessage[];
+}
+
 export type StatResult =
   | { kind: 'bar-chart'; data: BarChartData }
   | { kind: 'line-chart'; data: LineChartData }
@@ -104,6 +118,7 @@ export type StatResult =
   | { kind: 'heatmap'; data: HeatmapData }
   | { kind: 'text-samples'; data: TextSampleData }
   | { kind: 'scatter-quadrant'; data: ScatterQuadrantData }
-  | { kind: 'word-cloud'; data: WordCloudData };
+  | { kind: 'word-cloud'; data: WordCloudData }
+  | { kind: 'chat-snippet'; data: ChatSnippetData };
 
 export type StatResultKind = StatResult['kind'];

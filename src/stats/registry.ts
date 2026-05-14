@@ -14,6 +14,7 @@ import wordCloud from './modules/word-cloud';
 import reachOutRatio from './modules/reach-out-ratio';
 import doubleTexting from './modules/double-texting';
 import conversationStarterEnder from './modules/conversation-starter-ender';
+import randomSnippet from './modules/random-snippet';
 
 export const statRegistry: AnyStatModule[] = [
   messageCount,
@@ -31,6 +32,7 @@ export const statRegistry: AnyStatModule[] = [
   conversationStarterEnder,
   wordCloud,
   wordSearch,
+  randomSnippet,
 ];
 
 const byId = new Map(statRegistry.map((s) => [s.id, s]));

@@ -8,6 +8,7 @@ import { Heatmap } from './Heatmap';
 import { TextSamples } from './TextSamples';
 import { ScatterQuadrant } from './ScatterQuadrant';
 import { WordCloud } from './WordCloud';
+import { ChatSnippet } from './ChatSnippet';
 
 type RendererMap = {
   [K in StatResultKind]: ComponentType<{ data: Extract<StatResult, { kind: K }>['data'] }>;
@@ -22,4 +23,5 @@ export const renderers: RendererMap = {
   'text-samples': TextSamples,
   'scatter-quadrant': ScatterQuadrant,
   'word-cloud': WordCloud,
+  'chat-snippet': ChatSnippet,
 };
