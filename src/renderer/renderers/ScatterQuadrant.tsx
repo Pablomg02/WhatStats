@@ -143,7 +143,7 @@ export function ScatterQuadrant({ data }: { data: ScatterQuadrantData }) {
     series,
   };
 
-  return <ReactECharts option={option} style={{ height: 440 }} />;
+  return <ReactECharts option={option} style={{ height: 'clamp(300px, 68vw, 440px)' }} />;
 }
 
 function escapeHtml(s: string): string {

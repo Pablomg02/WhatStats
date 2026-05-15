@@ -20,7 +20,7 @@ export function Heatmap({ data }: { data: HeatmapData }) {
       borderColor: '#2E3D43',
       textStyle: { color: '#E9EDEF' },
     },
-    grid: { left: 80, right: 30, top: 30, bottom: 60 },
+    grid: { left: 10, right: 10, top: 30, bottom: 60, containLabel: true },
     xAxis: { type: 'category', data: data.xLabels, ...darkAxis },
     yAxis: { type: 'category', data: data.yLabels, ...darkAxis },
     visualMap: {
@@ -41,5 +41,5 @@ export function Heatmap({ data }: { data: HeatmapData }) {
     ],
   };
 
-  return <ReactECharts option={option} style={{ height: 380 }} />;
+  return <ReactECharts option={option} style={{ height: 'clamp(260px, 60vw, 380px)' }} />;
 }

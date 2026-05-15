@@ -6,20 +6,29 @@ export function Loading() {
 
   return (
     <PageLayout>
-      <div className="flex flex-col items-center justify-center gap-4 py-24 text-center">
+      <div className="flex flex-col items-center justify-center gap-5 py-24 text-center">
         {!error ? (
           <>
-            <div className="h-12 w-12 animate-spin rounded-full border-4 border-ws-green border-t-transparent" />
-            <h2 className="text-lg font-semibold text-ws-text">Analizando tu chat…</h2>
-            <p className="text-sm text-ws-muted">
-              Esto puede tardar unos segundos en chats grandes.
-            </p>
+            <div className="relative flex h-16 w-16 items-center justify-center">
+              <div className="absolute inset-0 animate-spin rounded-full border-2 border-ws-green border-t-transparent" />
+              <span className="text-2xl">💬</span>
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-ws-text">Analizando tu chat…</h2>
+              <p className="mt-1 text-sm text-ws-muted">
+                Esto puede tardar unos segundos en chats grandes.
+              </p>
+            </div>
           </>
         ) : (
           <>
-            <div className="text-4xl">⚠️</div>
-            <h2 className="text-lg font-semibold text-red-400">No se pudo procesar el archivo</h2>
-            <p className="text-sm text-red-500">{error.message}</p>
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-red-950 text-3xl">
+              ⚠️
+            </div>
+            <div>
+              <h2 className="text-lg font-bold text-red-400">No se pudo procesar el archivo</h2>
+              <p className="mt-1 text-sm text-red-500">{error.message}</p>
+            </div>
           </>
         )}
       </div>

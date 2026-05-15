@@ -90,8 +90,8 @@ export function computeDoubleTexting(
         label: autor,
         value: Math.round(rate * 10) / 10,
         extra: s.events
-          ? `${s.events} eventos · ráfaga media ${avgBurst.toFixed(1)} (máx ${s.maxBurst})`
-          : 'Sin double-texting',
+          ? `${s.events} veces · hasta ${s.maxBurst} seguidos`
+          : 'Ninguno',
       };
     })
     .sort((a, b) => b.value - a.value);

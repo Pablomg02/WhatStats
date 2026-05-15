@@ -1,7 +1,25 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Dropzone } from '../components/Dropzone';
 import { useSessionStore } from '@/state/session';
 import { PageLayout } from '../layout/PageLayout';
+
+const privacyItems = [
+  {
+    icon: '🔒',
+    title: 'Tus datos no salen de aquí',
+    desc: 'El análisis ocurre directamente en tu navegador. El archivo nunca viaja a ningún servidor.',
+  },
+  {
+    icon: '🚫',
+    title: 'Sin servidores ni bases de datos',
+    desc: 'No existe ningún backend que reciba, almacene ni procese tus mensajes.',
+  },
+  {
+    icon: '✅',
+    title: 'Código abierto y auditable',
+    desc: 'Puedes revisar exactamente qué hace la aplicación en cualquier momento.',
+  },
+];
 
 export function Landing() {
   const navigate = useNavigate();
@@ -18,29 +36,70 @@ export function Landing() {
 
   return (
     <PageLayout>
-      <div className="flex flex-col gap-10">
-        <section className="text-center">
-          <h1 className="text-4xl font-bold text-ws-text">WhatStats</h1>
-          <p className="mx-auto mt-3 max-w-2xl text-ws-muted">
-            Analiza tus chats de WhatsApp y descubre patrones, rankings y estadísticas detalladas.
-            <span className="mt-1 block font-semibold text-ws-green">
-              El análisis ocurre 100% en tu navegador. Ningún dato sale de tu dispositivo.
-            </span>
+      <div className="flex flex-col gap-14">
+
+        {/* Hero */}
+        <section className="flex flex-col items-center text-center pt-4 sm:pt-10">
+          {/* Badge análisis local */}
+          <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-ws-green/30 bg-ws-card text-xs font-semibold text-ws-green tracking-wide">
+            <span className="w-1.5 h-1.5 rounded-full bg-ws-green-bright animate-pulse" />
+            Análisis 100% local · Sin servidores · Sin cookies
+          </div>
+
+          {/* Título principal */}
+          <h1
+            className="text-6xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight leading-none pb-2"
+            style={{
+              background: 'linear-gradient(135deg, #25D366 0%, #00A884 50%, #128C7E 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            WhatStats
+          </h1>
+
+          {/* Subtítulo */}
+          <p className="mt-5 text-lg sm:text-xl md:text-2xl font-semibold text-ws-text/90">
+            Descubre los secretos de tus conversaciones
+          </p>
+
+          {/* Descripción */}
+          <p className="mt-3 max-w-md text-sm sm:text-base text-ws-muted leading-relaxed">
+            Patrones ocultos, rankings, actividad y mucho más de tus chats de WhatsApp —
+            de forma completamente privada.
           </p>
         </section>
 
-        <Dropzone onFileSelected={handleFile} />
+        {/* Dropzone */}
+        <div className="flex flex-col gap-2">
+          <Dropzone onFileSelected={handleFile} />
+          <p className="text-center text-xs text-ws-muted">
+            ¿No sabes obtener el fichero?{' '}
+            <Link to="/how-to-export" className="text-ws-green hover:underline font-medium">
+              Consulta aquí y lo tendrás en menos de 1 minuto
+            </Link>
+          </p>
+        </div>
 
-        <section id="privacidad" className="rounded-xl border border-ws-border bg-ws-card p-6">
-          <h2 className="text-xl font-semibold text-ws-text">Privacidad y seguridad</h2>
-          <ul className="mt-3 list-disc space-y-1 pl-5 text-sm text-ws-muted">
-            <li>El archivo nunca abandona tu dispositivo.</li>
-            <li>No hay servidor que reciba, almacene ni procese los mensajes.</li>
-            <li>El código es auditable.</li>
-          </ul>
-          <p className="mt-3 text-sm text-ws-muted opacity-75">
-            Recomendación: borra el archivo exportado del dispositivo cuando termines el análisis si
-            no quieres dejar rastro local del chat.
+        {/* Sección privacidad */}
+        <section id="privacidad" className="flex flex-col gap-5">
+          <p className="text-center text-[11px] font-bold uppercase tracking-widest text-ws-muted/60">
+            Tu privacidad, garantizada
+          </p>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
+            {privacyItems.map((item) => (
+              <div key={item.title} className="flex flex-col gap-2">
+                <span className="text-2xl">{item.icon}</span>
+                <p className="text-sm font-semibold text-ws-text">{item.title}</p>
+                <p className="text-xs text-ws-muted leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-[11px] text-ws-muted/50 max-w-sm mx-auto">
+            Consejo: borra el archivo exportado cuando termines si quieres eliminar cualquier rastro local del chat.
           </p>
         </section>
       </div>

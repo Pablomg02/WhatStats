@@ -18,7 +18,7 @@ export function LineChart({ data }: { data: LineChartData }) {
       borderColor: '#2E3D43',
       textStyle: { color: '#E9EDEF' },
     },
-    grid: { left: 60, right: 30, top: 30, bottom: 50 },
+    grid: { left: 60, right: 30, top: 30, bottom: 50, containLabel: true },
     xAxis: { type: 'category', data: data.points.map((p) => p.x), name: data.xLabel, ...darkAxis },
     yAxis: { type: 'value', name: data.yLabel, ...darkAxis },
     series: [
@@ -33,5 +33,5 @@ export function LineChart({ data }: { data: LineChartData }) {
     ],
   };
 
-  return <ReactECharts option={option} style={{ height: 380 }} />;
+  return <ReactECharts option={option} style={{ height: 'clamp(260px, 60vw, 380px)' }} />;
 }

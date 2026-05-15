@@ -36,5 +36,5 @@ export function BarChart({ data }: { data: BarChartData }) {
     ],
   };
 
-  return <ReactECharts option={option} style={{ height: 380 }} />;
+  return <ReactECharts option={option} style={{ height: 'clamp(260px, 60vw, 380px)' }} />;
 }

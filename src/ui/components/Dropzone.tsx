@@ -67,18 +67,27 @@ export function Dropzone({ onFileSelected }: DropzoneProps) {
         handleFiles(e.dataTransfer.files);
       }}
       onClick={() => inputRef.current?.click()}
-      className={`flex cursor-pointer flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed p-12 transition ${
+      className={`flex cursor-pointer flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed p-10 sm:p-14 transition-all duration-200 ${
         isDragging
-          ? 'border-ws-green bg-ws-card'
+          ? 'border-ws-green bg-ws-card scale-[1.01]'
           : 'border-ws-border bg-ws-surface hover:border-ws-green hover:bg-ws-card'
       }`}
     >
-      <div className="text-5xl">📂</div>
+      <div
+        className={`flex h-16 w-16 items-center justify-center rounded-2xl text-3xl transition-colors duration-200 ${
+          isDragging ? 'bg-ws-green/20' : 'bg-ws-card'
+        }`}
+      >
+        💬
+      </div>
       <div className="text-center">
-        <div className="text-lg font-semibold text-ws-text">
-          Arrastra aquí tu archivo .txt o .zip
+        <div className="text-base sm:text-lg font-semibold text-ws-text">
+          Arrastra aquí tu chat de WhatsApp
         </div>
-        <div className="text-sm text-ws-muted">o haz click para seleccionarlo</div>
+        <div className="mt-1 text-sm text-ws-muted">
+          Archivo <span className="text-ws-green font-medium">.txt</span> o{' '}
+          <span className="text-ws-green font-medium">.zip</span> · Haz clic para seleccionarlo
+        </div>
       </div>
       <input
         ref={inputRef}
