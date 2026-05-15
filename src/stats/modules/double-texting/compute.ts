@@ -85,7 +85,6 @@ export function computeDoubleTexting(
   const rows = Object.entries(stats)
     .map(([autor, s]) => {
       const rate = s.totalMessages > 0 ? (s.events / s.totalMessages) * 100 : 0;
-      const avgBurst = s.burstsCounted > 0 ? s.burstSizesSum / s.burstsCounted : 0;
       return {
         label: autor,
         value: Math.round(rate * 10) / 10,
