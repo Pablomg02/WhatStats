@@ -40,12 +40,6 @@ export function Landing() {
 
         {/* Hero */}
         <section className="flex flex-col items-center text-center pt-4 sm:pt-10">
-          {/* Badge análisis local */}
-          <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-ws-green/30 bg-ws-card text-xs font-semibold text-ws-green tracking-wide">
-            <span className="w-1.5 h-1.5 rounded-full bg-ws-green-bright animate-pulse" />
-            Análisis 100% local · Sin servidores · Sin cookies
-          </div>
-
           {/* Título principal */}
           <h1
             className="text-6xl sm:text-7xl lg:text-8xl font-extrabold tracking-tight leading-none pb-2"
@@ -66,8 +60,8 @@ export function Landing() {
 
           {/* Descripción */}
           <p className="mt-3 max-w-md text-sm sm:text-base text-ws-muted leading-relaxed">
-            Patrones ocultos, rankings, actividad y mucho más de tus chats de WhatsApp —
-            de forma completamente privada.
+            Patrones, estadísticas y mucho más de tu chat de WhatsApp,{' '}
+            <span className="font-semibold text-ws-green">privado y local</span>.
           </p>
         </section>
 
@@ -98,8 +92,23 @@ export function Landing() {
             ))}
           </div>
 
-          <p className="text-center text-[11px] text-ws-muted/50 max-w-sm mx-auto">
-            Consejo: borra el archivo exportado cuando termines si quieres eliminar cualquier rastro local del chat.
+          <p className="text-center text-sm text-ws-green/80 max-w-lg mx-auto leading-relaxed">
+            ✈️ <span className="font-semibold">¿No confías en la página?</span>{' '}
+            Activa el modo avión y analiza tu chat sin conexión. No necesitas desactivarlo en ningún momento.
+          </p>
+
+          <p className="text-center text-xs text-ws-muted/50 max-w-sm mx-auto">
+            ¿Quieres saber más sobre cómo garantizamos tu privacidad?{' '}
+            <a
+              href="#privacidad"
+              className="text-ws-green hover:underline font-medium"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('privacidad')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              Haz click aquí
+            </a>
           </p>
         </section>
       </div>

@@ -44,8 +44,16 @@ export function HowToExport() {
               'Abre la conversación que quieras analizar.',
               <span>Pulsa el icono de menú (⋮) y selecciona <strong className="text-ws-text">Más</strong> → <strong className="text-ws-text">Exportar chat</strong>.</span>,
               <span>Elige <strong className="text-ws-text">Sin archivos multimedia</strong>.</span>,
-              'Guarda o comparte el archivo exportado en tu dispositivo.',
+              <span>Cuando te pregunte dónde guardar, elige la carpeta <strong className="text-ws-text">Descargas</strong> — es la más fácil de encontrar después. Recuerda dónde lo guardas.</span>,
             ]} />
+            <TipBox>
+              <Tip icon="📤" label="Cómo subirlo">
+                Abre WhatStats en el navegador, pulsa el <strong className="text-ws-text">recuadro de carga</strong> y, en el selector de archivos, navega a <strong className="text-ws-text">Descargas</strong>. Selecciona el archivo exportado y listo.
+              </Tip>
+              <Tip icon="🗑️" label="Cómo borrarlo después">
+                Abre la app <strong className="text-ws-text">Mis archivos</strong> (o <strong className="text-ws-text">Archivos</strong> según tu móvil), ve a <strong className="text-ws-text">Descargas</strong>, mantén pulsado el archivo y selecciona <strong className="text-ws-text">Eliminar</strong>.
+              </Tip>
+            </TipBox>
           </div>
 
           <div className="h-px bg-ws-border" />
@@ -60,7 +68,29 @@ export function HowToExport() {
               'Pulsa el nombre del chat o del grupo en la parte superior.',
               <span>Desplázate hacia abajo y selecciona <strong className="text-ws-text">Exportar chat</strong>.</span>,
               <span>Elige <strong className="text-ws-text">Sin archivos</strong>.</span>,
-              'Comparte o guarda el archivo exportado en tu dispositivo.',
+              <span>Cuando aparezca el menú para compartir, pulsa <strong className="text-ws-text">Guardar en Archivos</strong>. Guárdalo donde quieras — puedes dejarlo en la raíz o crear una carpeta para organizarlo. Recuerda dónde lo guardas.</span>,
+            ]} />
+            <TipBox>
+              <Tip icon="📤" label="Cómo subirlo">
+                Abre WhatStats en Safari, pulsa el <strong className="text-ws-text">recuadro de carga</strong> y se abrirá la app <strong className="text-ws-text">Archivos</strong>. Navega a la carpeta donde lo guardaste, selecciónalo y listo.
+              </Tip>
+              <Tip icon="🗑️" label="Cómo borrarlo después">
+                Abre la app <strong className="text-ws-text">Archivos</strong>, localiza la carpeta donde guardaste el archivo, mantenlo pulsado y selecciona <strong className="text-ws-text">Eliminar</strong>.
+              </Tip>
+            </TipBox>
+          </div>
+
+          <div className="h-px bg-ws-border" />
+
+          <div className="flex flex-col gap-6">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">💻</span>
+              <h2 className="text-2xl font-bold text-ws-text">Windows / Mac</h2>
+            </div>
+            <Steps steps={[
+              <span>Exporta el chat desde tu móvil siguiendo los pasos de <strong className="text-ws-text">Android</strong> o <strong className="text-ws-text">iPhone</strong> de arriba.</span>,
+              <span>Pasa el archivo al ordenador por cualquier método fiable: un <strong className="text-ws-text">chat personal de WhatsApp</strong> (envíatelo a ti mismo), <strong className="text-ws-text">correo electrónico</strong>, <strong className="text-ws-text">Google Drive</strong>, <strong className="text-ws-text">iCloud</strong> u otro servicio similar.</span>,
+              <span>Descarga el archivo en el ordenador y súbelo a WhatStats pulsando el <strong className="text-ws-text">recuadro de carga</strong>, como harías con cualquier otro archivo.</span>,
             ]} />
           </div>
 
@@ -98,5 +128,25 @@ function Steps({ steps }: { steps: ReactNode[] }) {
         </li>
       ))}
     </ol>
+  );
+}
+
+function TipBox({ children }: { children: ReactNode }) {
+  return (
+    <div className="flex flex-col gap-3 rounded-xl border border-ws-border bg-ws-surface/50 px-5 py-4">
+      {children}
+    </div>
+  );
+}
+
+function Tip({ icon, label, children }: { icon: string; label: string; children: ReactNode }) {
+  return (
+    <div className="flex gap-3">
+      <span className="text-base leading-relaxed flex-shrink-0">{icon}</span>
+      <p className="text-sm text-ws-muted leading-relaxed">
+        <span className="font-semibold text-ws-text">{label}: </span>
+        {children}
+      </p>
+    </div>
   );
 }
